@@ -1,0 +1,8 @@
+vnet_ids=["id1","id2"]
+vnet_names=["vnet1", "vnet2"]
+vnet_rgs_names=["rg1","rg2"]
+allow_virtual_network_access=[false,false]
+allow_forwarded_traffic=[false,false]
+allow_gateway_transit=[false,false]
+use_remote_gateways=[false,false]
+custom_peering_names=["peering1", "peering2"]
