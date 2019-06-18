@@ -55,13 +55,14 @@ module "vnet2" {
 }
 
 module "vnet-peering" {
-  source = "git@git.fr.clara.net:claranet/cloudnative/projects/cloud/azure/terraform/modules/vnet-peering.git?ref=vX.X.X"
+  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/vnet-peering.git?ref=vX.X.X"
 
   vnet_ids       = ["${module.vnet1.virtual_network_id}", "${module.vnet2.virtual_network_id}"]
   vnet_names     = ["${module.vnet1.virtual_network_name}", "${module.vnet2.virtual_network_name}"]
   vnet_rgs_names = ["${module.rg1.resource_group_name}", "${module.rg2.resource_group_name}"]
 }
 ```
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
