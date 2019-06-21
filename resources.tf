@@ -1,7 +1,7 @@
 resource "azurerm_virtual_network_peering" "peering_src" {
   provider = "azurerm.src"
 
-  name                         = "${coalesce(var.custom_peering_src_name, format("peering-to-%s", var.vnet_src_name))}"
+  name                         = "${coalesce(var.custom_peering_dest_name, format("peering-to-%s", var.vnet_dest_name))}"
   resource_group_name          = "${var.vnet_src_rg_name}"
   virtual_network_name         = "${var.vnet_src_name}"
   remote_virtual_network_id    = "${var.vnet_dest_id}"
@@ -14,7 +14,7 @@ resource "azurerm_virtual_network_peering" "peering_src" {
 resource "azurerm_virtual_network_peering" "peering_dest" {
   provider = "azurerm.dest"
 
-  name                         = "${coalesce(var.custom_peering_dest_name, format("peering-to-%s", var.vnet_dest_name))}"
+  name                         = "${coalesce(var.custom_peering_src_name, format("peering-to-%s", var.vnet_src_name))}"
   resource_group_name          = "${var.vnet_dest_rg_name}"
   virtual_network_name         = "${var.vnet_dest_name}"
   remote_virtual_network_id    = "${var.vnet_src_id}"
