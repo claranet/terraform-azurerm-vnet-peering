@@ -8,12 +8,12 @@ variable "vnet_src_id" {
   description = "Id of the src vnet to peer"
 }
 
-variable "vnet_src_name" {
-  description = "Name of the src vnet to peer"
+variable "vnet_src_tenant_id" {
+  default = ""
 }
 
-variable "vnet_src_rg_name" {
-  description = "Resource group name of the src vnet to peer"
+variable "vnet_dest_tenant_id" {
+  default = ""
 }
 
 variable "allow_virtual_src_network_access" {
@@ -49,14 +49,6 @@ variable "custom_peering_src_name" {
 
 variable "vnet_dest_id" {
   description = "Id of the dest vnet to peer"
-}
-
-variable "vnet_dest_name" {
-  description = "Name of the dest vnet to peer"
-}
-
-variable "vnet_dest_rg_name" {
-  description = "Resource group name of the dest vnet to peer"
 }
 
 variable "allow_virtual_dest_network_access" {

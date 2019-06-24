@@ -63,12 +63,6 @@ module "vnet-peering-multisub" {
   vnet_src_id  = "${module.vnet.virtual_network_id}"
   vnet_dest_id = "${data.terraform_remote_state.support.virtual_network_id}"
 
-  vnet_src_name  = "${module.vnet.virtual_network_name}"
-  vnet_dest_name = "${data.terraform_remote_state.support.virtual_network_name}"
-
-  vnet_src_rg_name  = "${module.rg.resource_group_name}"
-  vnet_dest_rg_name = "${data.terraform_remote_state.support.resource_group_name}"
-
   allow_forwarded_src_traffic  = "true"
   allow_forwarded_dest_traffic = "true"
 
@@ -93,11 +87,10 @@ module "vnet-peering-multisub" {
 | use\_remote\_dest\_gateway | Option use_remote_gateway for the dest vnet to peer. Controls if remote gateways can be used on the local virtual network. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#use_remote_gateways | string | `"false"` | no |
 | use\_remote\_src\_gateway | Option use_remote_gateway for the src vnet to peer. Controls if remote gateways can be used on the local virtual network. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#use_remote_gateways | string | `"false"` | no |
 | vnet\_dest\_id | Id of the dest vnet to peer | string | n/a | yes |
-| vnet\_dest\_name | Name of the dest vnet to peer | string | n/a | yes |
-| vnet\_dest\_rg\_name | Resource group name of the dest vnet to peer | string | n/a | yes |
+| vnet\_dest\_tenant\_id |  | string | `""` | no |
 | vnet\_src\_id | Id of the src vnet to peer | string | n/a | yes |
-| vnet\_src\_name | Name of the src vnet to peer | string | n/a | yes |
-| vnet\_src\_rg\_name | Resource group name of the src vnet to peer | string | n/a | yes |
+| vnet\_src\_tenant\_id |  | string | `""` | no |
+
 
 ## Outputs
 
