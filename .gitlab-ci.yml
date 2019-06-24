@@ -18,7 +18,6 @@ tfvalidate:
   tags:
     - default
   script:
-    - mv main.tf.ci main.tf
     - mv terraform.tfvars.ci terraform.tfvars
     - terraform init
     - terraform validate
