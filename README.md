@@ -1,28 +1,10 @@
 # Azure Virtual Network Peering
 
-Common Azure module to generate a [Virtual Network Peering](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview) between two  [Virtual Networks](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview) which belongs to two different subscriptions [Azure Subscriptions](https://docs.microsoft.com/fr-fr/azure/active-directory/fundamentals/active-directory-how-subscriptions-associated-directory)
+Terraform module to generate a [Virtual Network Peering](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview) 
+between two  [Virtual Networks](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview) 
+which belongs to two different subscriptions [Azure Subscriptions](https://docs.microsoft.com/fr-fr/azure/active-directory/fundamentals/active-directory-how-subscriptions-associated-directory).
 
 ## Usage
-
-Add in the stack main.tf following lines:
-
-```hcl
-
-provider "azurerm" {
-  subscription_id = "${var.azure_subscription_id}"
-  tenant_id       = "${var.azure_tenant_id}"
-  alias           = "src"
-}
-
-provider "azurerm" {
-  subscription_id = "${data.terraform_remote_state.support.subscription_id}"
-  tenant_id       = "${var.azure_tenant_id}"
-  alias           = "dest"
-}
-
-```
-
-You must declare two providers aliases for the two differents Azure subscriptions. Here are the following lines needed (often to declare in your stack `main.tf` file):
 
 ```hcl
 module "azure-region" {
@@ -53,15 +35,10 @@ module "vnet" {
 }
 
 module "vnet-peering-multisub" {
-  source = "//git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/vnet-peering-multisub.git?ref=vX.X.X"
-
-  providers = {
-    azurerm.src  = "azurerm.src"
-    azurerm.dest = "azurerm.dest"
-  }
+  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/vnet-peering-multi-subscriptions.git?ref=vX.X.X"
 
   vnet_src_id  = "${module.vnet.virtual_network_id}"
-  vnet_dest_id = "${data.terraform_remote_state.support.virtual_network_id}"
+  vnet_dest_id = "${data.terraform_remote_state.support.support_vnet_id}"
 
   allow_forwarded_src_traffic  = "true"
   allow_forwarded_dest_traffic = "true"
@@ -69,7 +46,6 @@ module "vnet-peering-multisub" {
   allow_virtual_src_network_access  = "true"
   allow_virtual_dest_network_access = "true"
 }
-
 ```
 
 ## Inputs
@@ -90,7 +66,6 @@ module "vnet-peering-multisub" {
 | vnet\_dest\_tenant\_id |  | string | `""` | no |
 | vnet\_src\_id | Id of the src vnet to peer | string | n/a | yes |
 | vnet\_src\_tenant\_id |  | string | `""` | no |
-
 
 ## Outputs
 
