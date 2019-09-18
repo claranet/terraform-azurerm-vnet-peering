@@ -4,41 +4,46 @@ Terraform module to generate a [Virtual Network Peering](https://docs.microsoft.
 between two  [Virtual Networks](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview) 
 which belongs to two different subscriptions [Azure Subscriptions](https://docs.microsoft.com/fr-fr/azure/active-directory/fundamentals/active-directory-how-subscriptions-associated-directory).
 
+# Requirements
+* Azure provider >= 1.31
+* Terraform >=0.12
+
 ## Usage
 
 ```hcl
-module "azure-region" {
-  source       = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/regions.git?ref=vX.X.X"
-  azure_region = "${var.azure_region}"
+module "az-region" {
+  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/regions.git?ref=vX.X.X"
+
+  azure_region = var.azure_region
 }
 
 module "rg" {
   source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/rg.git?ref=vX.X.X"
 
-  location    = "${module.azure-region1.location}"
-  client_name = "${var.client_name}"
-  environment = "${var.environment}"
-  stack       = "${var.stack1}"
+  location    = module.az-region.location
+  client_name = var.client_name
+  environment = var.environment
+  stack       = var.stack
 }
 
-module "vnet" {
+module "azure-network-vnet" {
   source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/vnet.git?ref=vX.X.X"
+    
+  environment      = var.environment
+  location         = module.azure-region.location
+  location_short   = module.azure-region.location_short
+  client_name      = var.client_name
+  stack            = var.stack
 
-  environment    = "${var.environment}"
-  location       = "${module.azure-region.location}"
-  location_short = "${module.azure-region.location_short}"
-  client_name    = "${var.client_name}"
-  stack          = "${var.stack1}"
-
-  resource_group_name = "${module.rg1.resource_group_name}"
+  resource_group_name = module.rg.resource_group_name
   vnet_cidr           = ["10.10.0.0/16"]
 }
 
 module "vnet-peering-multisub" {
   source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/vnet-peering-multi-subscriptions.git?ref=vX.X.X"
 
-  vnet_src_id  = "${module.vnet.virtual_network_id}"
-  vnet_dest_id = "${data.terraform_remote_state.support.support_vnet_id}"
+  vnet_src_id  = module.vnet.virtual_network_id
+  vnet_dest_id = data.terraform_remote_state.support.support_vnet_id
 
   allow_forwarded_src_traffic  = "true"
   allow_forwarded_dest_traffic = "true"
