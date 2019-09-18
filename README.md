@@ -4,9 +4,12 @@ Terraform module to generate a [Virtual Network Peering](https://docs.microsoft.
 between two  [Virtual Networks](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview) 
 which belongs to two different subscriptions [Azure Subscriptions](https://docs.microsoft.com/fr-fr/azure/active-directory/fundamentals/active-directory-how-subscriptions-associated-directory).
 
-# Requirements
-* Azure provider >= 1.31
-* Terraform >=0.12
+## Terraform version compatibility
+ 
+| Module version | Terraform version |
+|----------------|-------------------|
+| >= 2.x.x       | 0.12.x            |
+| < 2.x.x        | 0.11.x            |
 
 ## Usage
 
