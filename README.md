@@ -31,7 +31,7 @@ module "rg" {
   source  = "claranet/rg/azurerm"
   version = "x.x.x"
 
-  location    = module.az-region.location
+  location    = module.azure-region.location
   client_name = var.client_name
   environment = var.environment
   stack       = var.stack
@@ -40,23 +40,26 @@ module "rg" {
 module "azure-virtual-network" {
   source  = "claranet/vnet/azurerm"
   version = "x.x.x"
-    
-  environment      = var.environment
-  location         = module.azure-region.location
-  location_short   = module.azure-region.location_short
-  client_name      = var.client_name
-  stack            = var.stack
+
+  environment    = var.environment
+  location       = module.azure-region.location
+  location_short = module.azure-region.location_short
+  client_name    = var.client_name
+  stack          = var.stack
 
   resource_group_name = module.rg.resource_group_name
-  vnet_cidr           = ["10.10.0.0/16"]
+
+  custom_vnet_name = var.custom_vnet_name
+  vnet_cidr        = ["10.10.0.0/16"]
+  dns_servers      = ["10.0.0.4", "10.0.0.5"] # Can be empty if not used
 }
 
-module "azure-virtual-network-peering" {
+module "azure-vnet-peering" {
   source  = "claranet/vnet-peering/azurerm"
   version = "x.x.x"
 
-  vnet_src_id  = module.vnet.virtual_network_id
-  vnet_dest_id = data.terraform_remote_state.support.support_vnet_id
+  vnet_src_id  = module.azure-virtual-network.virtual_network_id
+  vnet_dest_id = data.terraform_remote_state.destination_infra.virtual_network_id
 
   allow_forwarded_src_traffic  = "true"
   allow_forwarded_dest_traffic = "true"
