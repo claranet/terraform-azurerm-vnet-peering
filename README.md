@@ -42,8 +42,8 @@ module "azure-network-vnet" {
   vnet_cidr           = ["10.10.0.0/16"]
 }
 
-module "vnet-peering-multisub" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/vnet-peering-multi-subscriptions.git?ref=vX.X.X"
+module "vnet-peering" {
+  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/vnet-peering.git?ref=vX.X.X"
 
   vnet_src_id  = module.vnet.virtual_network_id
   vnet_dest_id = data.terraform_remote_state.support.support_vnet_id
