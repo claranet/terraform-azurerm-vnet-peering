@@ -1,44 +1,69 @@
 # Azure Virtual Network Peering
 
-Terraform module to generate a [Virtual Network Peering](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview) 
-between two  [Virtual Networks](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview) 
-which belongs to two different subscriptions [Azure Subscriptions](https://docs.microsoft.com/fr-fr/azure/active-directory/fundamentals/active-directory-how-subscriptions-associated-directory).
+[![Changelog](https://img.shields.io/badge/changelog-release-green.svg)](CHANGELOG.md) [![Notice](https://img.shields.io/badge/notice-copyright-yellow.svg)](NOTICE) [![Apache V2 License](https://img.shields.io/badge/license-Apache%20V2-orange.svg)](LICENSE) [![TF Registry](https://img.shields.io/badge/terraform-registry-blue.svg)](https://registry.terraform.io/modules/claranet/vnet-peering/azurerm/)
+
+Terraform module to generate a [Virtual Network Peering](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
+between two [Virtual Networks](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview)
+which can belong to two different [Azure Subscriptions](https://docs.microsoft.com/fr-fr/azure/active-directory/fundamentals/active-directory-how-subscriptions-associated-directory).
+
+## Requirements
+
+* [AzureRM Terraform provider](https://www.terraform.io/docs/providers/azurerm/) >= 1.32
+
+## Terraform version compatibility
+ 
+| Module version | Terraform version |
+|----------------|-------------------|
+| >= 2.x.x       | 0.12.x            |
+| < 2.x.x        | 0.11.x            |
 
 ## Usage
 
+This module is optimized to work with the [Claranet terraform-wrapper](https://github.com/claranet/terraform-wrapper) tool
+which set some terraform variables in the environment needed by this module.
+More details about variables set by the `terraform-wrapper` available in the [documentation](https://github.com/claranet/terraform-wrapper#environment).
+
 ```hcl
 module "azure-region" {
-  source       = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/regions.git?ref=vX.X.X"
-  azure_region = "${var.azure_region}"
+  source  = "claranet/regions/azurerm"
+  version = "x.x.x"
+
+  azure_region = var.azure_region
 }
 
 module "rg" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/rg.git?ref=vX.X.X"
+  source  = "claranet/rg/azurerm"
+  version = "x.x.x"
 
-  location    = "${module.azure-region1.location}"
-  client_name = "${var.client_name}"
-  environment = "${var.environment}"
-  stack       = "${var.stack1}"
+  location    = module.azure-region.location
+  client_name = var.client_name
+  environment = var.environment
+  stack       = var.stack
 }
 
-module "vnet" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/vnet.git?ref=vX.X.X"
+module "azure-virtual-network" {
+  source  = "claranet/vnet/azurerm"
+  version = "x.x.x"
 
-  environment    = "${var.environment}"
-  location       = "${module.azure-region.location}"
-  location_short = "${module.azure-region.location_short}"
-  client_name    = "${var.client_name}"
-  stack          = "${var.stack1}"
+  environment    = var.environment
+  location       = module.azure-region.location
+  location_short = module.azure-region.location_short
+  client_name    = var.client_name
+  stack          = var.stack
 
-  resource_group_name = "${module.rg1.resource_group_name}"
-  vnet_cidr           = ["10.10.0.0/16"]
+  resource_group_name = module.rg.resource_group_name
+
+  custom_vnet_name = var.custom_vnet_name
+  vnet_cidr        = ["10.10.0.0/16"]
+  dns_servers      = ["10.0.0.4", "10.0.0.5"] # Can be empty if not used
 }
 
-module "vnet-peering-multisub" {
-  source = "git::ssh://git@git.fr.clara.net/claranet/cloudnative/projects/cloud/azure/terraform/modules/vnet-peering-multi-subscriptions.git?ref=vX.X.X"
+module "azure-vnet-peering" {
+  source  = "claranet/vnet-peering/azurerm"
+  version = "x.x.x"
 
-  vnet_src_id  = "${module.vnet.virtual_network_id}"
-  vnet_dest_id = "${data.terraform_remote_state.support.support_vnet_id}"
+  vnet_src_id  = module.azure-virtual-network.virtual_network_id
+  vnet_dest_id = data.terraform_remote_state.destination_infra.virtual_network_id
 
   allow_forwarded_src_traffic  = "true"
   allow_forwarded_dest_traffic = "true"
@@ -78,6 +103,6 @@ module "vnet-peering-multisub" {
 
 ## Related documentation
 
-Azure vnet peering documentation: [https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview]
+Terraform resource documentation: [terraform.io/docs/providers/azurerm/r/virtual_network_peering.html](https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html)
 
-Terraform vnet_peering resource documentation: [https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html]
+Microsoft Azure documentation: [docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview)
