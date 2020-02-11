@@ -91,6 +91,8 @@ module "azure-vnet-peering" {
 | vnet\_dest\_tenant\_id | Tenant ID of the dest vnet to peer | string | `""` | no |
 | vnet\_src\_id | ID of the src vnet to peer | string | n/a | yes |
 | vnet\_src\_tenant\_id | Tenant ID of the src vnet to peer | string | `""` | no |
+| skip\_dest\_provider\_registration | Option to enable or disable provider registration on dest tenant | `bool` | `false` | no |
+| skip\_src\_provider\_registration | Option to enable or disable provider registration on src tenant | `bool` | `false` | no |
 
 ## Outputs
 
