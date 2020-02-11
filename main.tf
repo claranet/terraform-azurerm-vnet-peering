@@ -9,6 +9,7 @@ provider "azurerm" {
     data.azurerm_client_config.current_config.tenant_id,
   )
   alias = "src"
+  skip_provider_registration = var.skip_src_provider_registration
 }
 
 provider "azurerm" {
@@ -19,4 +20,5 @@ provider "azurerm" {
     data.azurerm_client_config.current_config.tenant_id,
   )
   alias = "dest"
+  skip_provider_registration = var.skip_dest_provider_registration
 }
