@@ -95,11 +95,11 @@ variable "use_remote_dest_gateway" {
 variable "custom_peering_dest_name" {
   description = "Custom name of the vnet peerings to create"
   type        = bool
-  default     = null
+  default     = false
 }
 
 variable "skip_dest_provider_registration" {
   description = "Option to enable or disable provider registration on dest tenant"
   type        = bool
-  default     = null
+  default     = false
 }
