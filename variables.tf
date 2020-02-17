@@ -45,6 +45,12 @@ variable "custom_peering_src_name" {
   default     = ""
 }
 
+variable "skip_src_provider_registration" {
+  description = "Option to enable or disable provider registration on src tenant"
+  type        = bool
+  default     = false
+}
+
 ################
 #
 # DEST PEER CONF
@@ -90,4 +96,10 @@ variable "custom_peering_dest_name" {
   description = "Custom name of the vnet peerings to create"
   type        = string
   default     = ""
+}
+
+variable "skip_dest_provider_registration" {
+  description = "Option to enable or disable provider registration on dest tenant"
+  type        = bool
+  default     = false
 }

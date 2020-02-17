@@ -8,7 +8,8 @@ provider "azurerm" {
     var.vnet_src_tenant_id,
     data.azurerm_client_config.current_config.tenant_id,
   )
-  alias = "src"
+  alias                      = "src"
+  skip_provider_registration = var.skip_src_provider_registration
 }
 
 provider "azurerm" {
@@ -18,5 +19,6 @@ provider "azurerm" {
     var.vnet_dest_tenant_id,
     data.azurerm_client_config.current_config.tenant_id,
   )
-  alias = "dest"
+  alias                      = "dest"
+  skip_provider_registration = var.skip_dest_provider_registration
 }
