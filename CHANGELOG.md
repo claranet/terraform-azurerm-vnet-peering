@@ -1,7 +1,7 @@
-# v2.0.1 - 2020-02-12
+# v2.1.0 - 2020-02-17
 
 Added
-  * AZ-181 : Ability to skip provider registration on source and destination tenants
+  * AZ-181: Ability to skip provider registration on source and destination tenants
 
 # v2.0.1 - 2019-11-22
 
