@@ -15,6 +15,18 @@ variable "vnet_src_tenant_id" {
   default     = ""
 }
 
+variable "vnet_src_client_id" {
+  description = "Client ID to use for authentication with the src tenant. Defaults to the ARM_CLIENT_ID environment variable"
+  type        = string
+  default     = null
+}
+
+variable "vnet_src_client_secret" {
+  description = "Client Secret to use for authentication with the src tenant. Defaults to the ARM_CLIENT_SECRET environment variable"
+  type        = string
+  default     = null
+}
+
 variable "allow_virtual_src_network_access" {
   description = "Option allow_virtual_network_access for the src vnet to peer. Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to false. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_virtual_network_access"
   type        = bool
@@ -66,6 +78,18 @@ variable "vnet_dest_tenant_id" {
   description = "Tenant ID of the dest vnet to peer"
   type        = string
   default     = ""
+}
+
+variable "vnet_dest_client_id" {
+  description = "Client ID to use for authentication with the dest tenant. Defaults to the ARM_CLIENT_ID environment variable"
+  type        = string
+  default     = null
+}
+
+variable "vnet_dest_client_secret" {
+  description = "Client Secret to use for authentication with the dest tenant. Defaults to the ARM_CLIENT_SECRET environment variable"
+  type        = string
+  default     = null
 }
 
 variable "allow_virtual_dest_network_access" {

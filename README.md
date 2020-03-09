@@ -91,8 +91,12 @@ module "azure-vnet-peering" {
 https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#use_remote_gateways | `bool` | `false` | no |
 | vnet\_dest\_id | ID of the dest vnet to peer | `string` | n/a | yes |
 | vnet\_dest\_tenant\_id | Tenant ID of the dest vnet to peer | `string` | `""` | no |
+| vnet\_dest\_client\_id | Client ID to use for authentication with the dest tenant. Defaults to the ARM_CLIENT_ID environment variable | `string` | `null` | no |
+| vnet\_dest\_client\_secret | Client Secret to use for authentication with the dest tenant. Defaults to the ARM_CLIENT_SECRET environment variable | `string` | `null` | no |
 | vnet\_src\_id | ID of the src vnet to peer | `string` | n/a | yes |
 | vnet\_src\_tenant\_id | Tenant ID of the src vnet to peer | `string` | `""` | no |
+| vnet\_src\_client\_id | Client ID to use for authentication with the src tenant. Defaults to the ARM_CLIENT_ID environment variable | `string` | `null` | no |
+| vnet\_src\_client\_secret | Client Secret to use for authentication with the src tenant. Defaults to the ARM_CLIENT_SECRET environment variable | `string` | `null` | no |
 
 ## Outputs
 

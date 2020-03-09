@@ -1,3 +1,8 @@
+# v2.1.2 - 2020-03-10
+
+Added
+  * Ability to use different client_id's and client_secret's for source and destination
+
 # v2.1.1 - 2020-03-09
 
 Fixed
