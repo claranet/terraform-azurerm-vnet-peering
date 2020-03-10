@@ -2,6 +2,11 @@ data "azurerm_client_config" "current_config" {
 }
 
 provider "azurerm" {
+  features {}
+  version = ">= 2.0"
+}
+
+provider "azurerm" {
   version         = ">= 2.0"
   subscription_id = local.vnet_src_subscription_id
   tenant_id = coalesce(
