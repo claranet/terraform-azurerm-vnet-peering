@@ -1,7 +1,7 @@
-# v2.1.2 - 2020-03-10
+# v2.1.2 - 2020-03-12
 
 Added
-  * Ability to use different client_id's and client_secret's for source and destination
+  * [GITHUB-1](https://github.com/claranet/terraform-azurerm-vnet-peering/pull/3): Ability to use different `client_id`'s and `client_secret`'s for source and destination
 
 # v2.1.1 - 2020-03-09
 
