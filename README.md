@@ -59,6 +59,9 @@ module "azure-vnet-peering" {
   source  = "claranet/vnet-peering/azurerm"
   version = "x.x.x"
 
+  vnet_src_tenant_id  = "xxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  vnet_dest_tenant_id = "xxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
   vnet_src_id  = module.azure-virtual-network.virtual_network_id
   vnet_dest_id = data.terraform_remote_state.destination_infra.virtual_network_id
 
@@ -73,7 +76,7 @@ module "azure-vnet-peering" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | allow\_forwarded\_dest\_traffic | Option allow\_forwarded\_traffic for the dest vnet to peer. Controls if forwarded traffic from VMs in the remote virtual network is allowed. Defaults to false. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_forwarded_traffic | `bool` | `false` | no |
 | allow\_forwarded\_src\_traffic | Option allow\_forwarded\_traffic for the src vnet to peer. Controls if forwarded traffic from VMs in the remote virtual network is allowed. Defaults to false. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_forwarded_traffic | `bool` | `false` | no |
 | allow\_gateway\_dest\_transit | Option allow\_gateway\_transit for the dest vnet to peer. Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_gateway_transit | `bool` | `false` | no |

@@ -1,7 +1,7 @@
 # v3.0.0 - Unreleased
 
 Breaking
-  * AZ-198: Upgrade module to be compliant with AzureRM 2.0
+  * AZ-198: Upgrade module to be compliant with AzureRM 2.0 + update tenant_id variables to be mandatory
 
 # v2.x.x - Unreleased
 
