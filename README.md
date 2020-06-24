@@ -6,6 +6,10 @@ Terraform module to generate a [Virtual Network Peering](https://docs.microsoft.
 between two [Virtual Networks](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview)
 which can belong to two different [Azure Subscriptions](https://docs.microsoft.com/fr-fr/azure/active-directory/fundamentals/active-directory-how-subscriptions-associated-directory).
 
+## Limitations
+
+* Peering between two virtual networks in different tenants isn't possible.
+
 ## Version compatibility
 
 | Module version    | Terraform version | AzureRM version |
