@@ -1,4 +1,9 @@
-# Unreleased
+# v3.0.0 - Unreleased
+
+Breaking
+  * AZ-198: Upgrade module AzureRM >= 2.0 + update tenant_id variables to be mandatory
+
+# v2.x.x - Unreleased
 
 Fixed
   * AZ-207: Fix README

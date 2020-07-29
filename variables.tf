@@ -12,7 +12,6 @@ variable "vnet_src_id" {
 variable "vnet_src_tenant_id" {
   description = "Tenant ID of the src vnet to peer"
   type        = string
-  default     = ""
 }
 
 variable "vnet_src_client_id" {
@@ -77,7 +76,6 @@ variable "vnet_dest_id" {
 variable "vnet_dest_tenant_id" {
   description = "Tenant ID of the dest vnet to peer"
   type        = string
-  default     = ""
 }
 
 variable "vnet_dest_client_id" {
