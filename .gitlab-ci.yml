@@ -1,13 +1,36 @@
 ---
-include:
-  - template: 'Workflows/Branch-Pipelines.gitlab-ci.yml'
-  - project: 'claranet/projects/cloud/azure/terraform/ci'
-    ref: master
-    file: '/module-tf_0.12-azurerm_2.x-validate.yml'
-  - project: 'claranet/projects/cloud/azure/terraform/ci'
-    ref: master
-    file: '/module-tf_0.13-azurerm_2.x-validate.yml'
-  - project: 'claranet/projects/cloud/azure/terraform/ci'
-    ref: master
-    file: '/module-tf_0.14-azurerm_2.x-validate.yml'
+variables:
+  TERRAFORM_VERSION_014: "0.14.5"
+  AZURERM_PROVIDER_VERSION_2X: "2.0"
+
+stages:
+  - validate
+
+tf 0.14 fmt check:
+  stage: validate
+  image:
+    name: hashicorp/terraform:${TERRAFORM_VERSION_014}
+  tags:
+    - default
+  before_script: []
+  script:
+    - terraform -v
+    - terraform fmt -write=false -diff -check
+
+tf 0.14 validate azurerm 2.x:
+  stage: validate
+  image:
+    name: hashicorp/terraform:${TERRAFORM_VERSION_014}
+  tags:
+    - default
+  before_script:
+    # We store the CI token as git credentials and replace all modules sources with git Https in order to use it
+    - git config --global credential.helper store
+    - echo "https://gitlab-ci-token:${CI_JOB_TOKEN}@git.fr.clara.net" > "${HOME}/.git-credentials"
+    - sed -i -e "s#ssh://git@git\.fr\.clara\.net#https://git.fr.clara.net#g" *.tf
+    - mv terraform.tfvars.ci terraform.tfvars
+  script:
+    - terraform -v
+    - terraform init
+    - terraform validate
 ...
