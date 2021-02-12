@@ -1,4 +1,7 @@
+
 resource "azurerm_virtual_network_peering" "peering_src" {
+  provider = azurerm.src
+
   name = coalesce(
     var.custom_peering_dest_name,
     format("peering-to-%s", local.vnet_dest_name),
@@ -13,7 +16,7 @@ resource "azurerm_virtual_network_peering" "peering_src" {
 }
 
 resource "azurerm_virtual_network_peering" "peering_dest" {
-  provider = azurerm.dest
+  provider = azurerm.dst
 
   name = coalesce(
     var.custom_peering_src_name,
