@@ -1,4 +1,5 @@
 ---
+# Custom CI due to multiple providers use
 variables:
   TERRAFORM_VERSION_014: "0.14.5"
   AZURERM_PROVIDER_VERSION_2X: "2.0"
