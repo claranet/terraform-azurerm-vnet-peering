@@ -1,7 +1,10 @@
-# v3.1.0/v4.0.0 - Unreleased
+# v4.0.0 - 2021-02-22
 
 Updated
   * AZ-273: Module now compatible terraform `v0.13+` and `v0.14+`
+
+Breaking
+  * AZ-273: Provider confugurations must be declared before calling the module (check README example for more info)
 
 # v3.0.0 - 2020-07-29
 
