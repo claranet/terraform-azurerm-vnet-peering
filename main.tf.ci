@@ -1,0 +1,13 @@
+provider "azurerm" {
+  alias           = "dst"
+  subscription_id = "000-000-000"
+  tenant_id       = "000-000-000"
+  features {}
+}
+provider "azurerm" {
+  alias           = "src"
+  subscription_id = "000-000-000"
+  tenant_id       = "000-000-000"
+  features {}
+}
+

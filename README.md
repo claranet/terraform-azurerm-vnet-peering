@@ -26,6 +26,21 @@ which set some terraform variables in the environment needed by this module.
 More details about variables set by the `terraform-wrapper` available in the [documentation](https://github.com/claranet/terraform-wrapper#environment).
 
 ```hcl
+provider "azurerm" {
+  alias           = "dst"
+  subscription_id = var.azure_subscription_id
+  tenant_id       = var.azure_tenant_id
+
+  features {}
+}
+provider "azurerm" {
+  alias           = "src"
+  subscription_id = var.azure_subscription_id
+  tenant_id       = var.azure_tenant_id
+
+  features {}
+}
+
 module "azure-region" {
   source  = "claranet/regions/azurerm"
   version = "x.x.x"
@@ -64,8 +79,10 @@ module "azure-vnet-peering" {
   source  = "claranet/vnet-peering/azurerm"
   version = "x.x.x"
 
-  vnet_src_tenant_id  = "xxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-  vnet_dest_tenant_id = "xxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  providers = {
+    azurerm.src = azurerm.src
+    azurerm.dst = azurerm.dst
+  }
 
   vnet_src_id  = module.azure-virtual-network.virtual_network_id
   vnet_dest_id = data.terraform_remote_state.destination_infra.virtual_network_id
@@ -90,18 +107,10 @@ module "azure-vnet-peering" {
 | allow\_virtual\_src\_network\_access | Option allow\_virtual\_network\_access for the src vnet to peer. Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to false. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_virtual_network_access | `bool` | `false` | no |
 | custom\_peering\_dest\_name | Custom name of the vnet peerings to create | `string` | `""` | no |
 | custom\_peering\_src\_name | Custom name of the vnet peerings to create | `string` | `""` | no |
-| skip\_dest\_provider\_registration | Option to enable or disable provider registration on dest tenant | `bool` | `false` | no |
-| skip\_src\_provider\_registration | Option to enable or disable provider registration on src tenant | `bool` | `false` | no |
 | use\_remote\_dest\_gateway | Option use\_remote\_gateway for the dest vnet to peer. Controls if remote gateways can be used on the local virtual network. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#use_remote_gateways | `bool` | `false` | no |
 | use\_remote\_src\_gateway | Option use\_remote\_gateway for the src vnet to peer. Controls if remote gateways can be used on the local virtual network. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#use_remote_gateways | `bool` | `false` | no |
 | vnet\_dest\_id | ID of the dest vnet to peer | `string` | n/a | yes |
-| vnet\_dest\_tenant\_id | Tenant ID of the dest vnet to peer | `string` | `""` | no |
-| vnet\_dest\_client\_id | Client ID to use for authentication with the dest tenant. Defaults to the ARM_CLIENT_ID environment variable | `string` | `null` | no |
-| vnet\_dest\_client\_secret | Client Secret to use for authentication with the dest tenant. Defaults to the ARM_CLIENT_SECRET environment variable | `string` | `null` | no |
 | vnet\_src\_id | ID of the src vnet to peer | `string` | n/a | yes |
-| vnet\_src\_tenant\_id | Tenant ID of the src vnet to peer | `string` | `""` | no |
-| vnet\_src\_client\_id | Client ID to use for authentication with the src tenant. Defaults to the ARM_CLIENT_ID environment variable | `string` | `null` | no |
-| vnet\_src\_client\_secret | Client Secret to use for authentication with the src tenant. Defaults to the ARM_CLIENT_SECRET environment variable | `string` | `null` | no |
 
 ## Outputs
 
