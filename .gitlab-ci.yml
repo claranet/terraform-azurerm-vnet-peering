@@ -1,25 +1,25 @@
 ---
 # Custom CI due to multiple providers use
 variables:
-  TERRAFORM_VERSION_014: "0.15.5"
+  TERRAFORM_VERSION: "0.15.5"
   AZURERM_PROVIDER_VERSION_2X: "2.0"
 
 stages:
   - validate
 
-tf 0.14 fmt check:
+tf 0.15 fmt check:
   stage: validate
   image:
-    name: hashicorp/terraform:${TERRAFORM_VERSION_014}
+    name: hashicorp/terraform:${TERRAFORM_VERSION}
   before_script: []
   script:
     - terraform -v
     - terraform fmt -write=false -diff -check
 
-tf 0.14 validate azurerm 2.x:
+tf 0.15 validate azurerm 2.x:
   stage: validate
   image:
-    name: hashicorp/terraform:${TERRAFORM_VERSION_014}
+    name: hashicorp/terraform:${TERRAFORM_VERSION}
   before_script:
     # We store the CI token as git credentials and replace all modules sources with git Https in order to use it
     - git config --global credential.helper store
