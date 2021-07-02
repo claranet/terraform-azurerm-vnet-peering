@@ -96,6 +96,13 @@ module "azure-vnet-peering" {
 }
 ```
 
+## Providers
+
+| Name        | Version |
+| ----------- | ------- |
+| azurerm.dst | >= 2.0  |
+| azurerm.src | >= 2.0  |
+
 ## Inputs
 
 | Name                                  | Description                                                                                                                                                                                                                                                                                     | Type     | Default | Required |
