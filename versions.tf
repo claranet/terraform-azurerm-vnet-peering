@@ -6,5 +6,9 @@ terraform {
       version               = ">= 2.0"
       configuration_aliases = [azurerm.src, azurerm.dst]
     }
+    azurecaf = {
+      source  = "aztfmod/azurecaf"
+      version = "~> 1.1"
+    }
   }
 }

@@ -88,11 +88,11 @@ module "azure-vnet-peering" {
   vnet_src_id  = module.azure-virtual-network.virtual_network_id
   vnet_dest_id = data.terraform_remote_state.destination_infra.virtual_network_id
 
-  allow_forwarded_src_traffic  = "true"
-  allow_forwarded_dest_traffic = "true"
+  allow_forwarded_src_traffic = true
+  allow_forwarded_dst_traffic = true
 
-  allow_virtual_src_network_access  = "true"
-  allow_virtual_dest_network_access = "true"
+  allow_virtual_src_network_access  = true
+  allow_virtual_dest_network_access = true
 }
 ```
 
@@ -100,6 +100,7 @@ module "azure-vnet-peering" {
 
 | Name        | Version |
 | ----------- | ------- |
+| azurecaf    | ~> 1.1  |
 | azurerm.dst | >= 2.0  |
 | azurerm.src | >= 2.0  |
 
@@ -113,8 +114,11 @@ module "azure-vnet-peering" {
 | allow\_gateway\_src\_transit          | Option allow\_gateway\_transit for the src vnet to peer. Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_gateway_transit                              | `bool`   | `false` |    no    |
 | allow\_virtual\_dest\_network\_access | Option allow\_virtual\_network\_access for the dest vnet to peer. Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to false. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_virtual_network_access | `bool`   | `false` |    no    |
 | allow\_virtual\_src\_network\_access  | Option allow\_virtual\_network\_access for the src vnet to peer. Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to false. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_virtual_network_access  | `bool`   | `false` |    no    |
-| custom\_peering\_dest\_name           | Custom name of the vnet peerings to create                                                                                                                                                                                                                                                      | `string` | `""`    |    no    |
+| custom\_peering\_dst\_name            | Custom name of the vnet peerings to create                                                                                                                                                                                                                                                      | `string` | `""`    |    no    |
 | custom\_peering\_src\_name            | Custom name of the vnet peerings to create                                                                                                                                                                                                                                                      | `string` | `""`    |    no    |
+| name\_prefix                          | Optional prefix for the generated name                                                                                                                                                                                                                                                          | `string` | `""`    |    no    |
+| name\_suffix                          | Optional suffix for the generated name                                                                                                                                                                                                                                                          | `string` | `""`    |    no    |
+| use\_caf\_naming                      | Use the Azure CAF naming provider to generate default resource name. `custom_rg_name` override this if set. Legacy default name is used if this is set to `false`.                                                                                                                              | `bool`   | `true`  |    no    |
 | use\_remote\_dest\_gateway            | Option use\_remote\_gateway for the dest vnet to peer. Controls if remote gateways can be used on the local virtual network. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#use_remote_gateways                                                                 | `bool`   | `false` |    no    |
 | use\_remote\_src\_gateway             | Option use\_remote\_gateway for the src vnet to peer. Controls if remote gateways can be used on the local virtual network. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#use_remote_gateways                                                                  | `bool`   | `false` |    no    |
 | vnet\_dest\_id                        | ID of the dest vnet to peer                                                                                                                                                                                                                                                                     | `string` | n/a     |   yes    |

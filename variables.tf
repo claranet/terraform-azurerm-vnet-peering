@@ -33,12 +33,6 @@ variable "use_remote_src_gateway" {
   default     = false
 }
 
-variable "custom_peering_src_name" {
-  description = "Custom name of the vnet peerings to create"
-  type        = string
-  default     = ""
-}
-
 ################
 #
 # DEST PEER CONF
@@ -72,10 +66,4 @@ variable "use_remote_dest_gateway" {
   description = "Option use_remote_gateway for the dest vnet to peer. Controls if remote gateways can be used on the local virtual network. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#use_remote_gateways"
   type        = bool
   default     = false
-}
-
-variable "custom_peering_dest_name" {
-  description = "Custom name of the vnet peerings to create"
-  type        = string
-  default     = ""
 }

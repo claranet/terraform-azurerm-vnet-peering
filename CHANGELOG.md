@@ -2,6 +2,7 @@
 
 Breaking
   * AZ-495: Update provider block with provider aliases and avoid warning with Terraform 0.15+
+  * AZ-515: Option to use Azure CAF naming provider to name resources
 
 # v4.0.0 - 2021-02-22
 
