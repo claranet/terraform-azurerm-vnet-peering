@@ -20,6 +20,13 @@ which can belong to two different [Azure Subscriptions](https://docs.microsoft.c
 | >= 2.x.x       | 0.12.x            | < 2.0           |
 | <  2.x.x       | 0.11.x            | < 2.0           |
 
+## Naming
+
+Resource naming is based on the [Microsoft CAF naming convention best practices](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming). Legacy naming is available by setting the parameter `use_caf_naming` to false.
+We rely on [the official Terraform Azure CAF naming provider](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/azurecaf_name) to generate resource names.
+
+Resource generated CAF name by default: `vpeer-{VNET Source name}-to-{VNET Destination name}`
+
 ## Usage
 
 This module is optimized to work with the [Claranet terraform-wrapper](https://github.com/claranet/terraform-wrapper) tool
@@ -117,7 +124,7 @@ module "azure-vnet-peering" {
 | custom\_peering\_dst\_name            | Custom name of the vnet peerings to create                                                                                                                                                                                                                                                      | `string` | `""`    |    no    |
 | custom\_peering\_src\_name            | Custom name of the vnet peerings to create                                                                                                                                                                                                                                                      | `string` | `""`    |    no    |
 | name\_prefix                          | Optional prefix for the generated name                                                                                                                                                                                                                                                          | `string` | `""`    |    no    |
-| name\_suffix                          | Optional suffix for the generated name                                                                                                                                                                                                                                                          | `string` | `""`    |    no    |
+| name\_suffix                          | Optional suffix for the generated name                                                                                                                                                                                                                                                          | `string` | `"to"`  |    no    |
 | use\_caf\_naming                      | Use the Azure CAF naming provider to generate default resource name. `custom_rg_name` override this if set. Legacy default name is used if this is set to `false`.                                                                                                                              | `bool`   | `true`  |    no    |
 | use\_remote\_dest\_gateway            | Option use\_remote\_gateway for the dest vnet to peer. Controls if remote gateways can be used on the local virtual network. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#use_remote_gateways                                                                 | `bool`   | `false` |    no    |
 | use\_remote\_src\_gateway             | Option use\_remote\_gateway for the src vnet to peer. Controls if remote gateways can be used on the local virtual network. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#use_remote_gateways                                                                  | `bool`   | `false` |    no    |

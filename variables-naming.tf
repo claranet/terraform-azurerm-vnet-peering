@@ -19,7 +19,7 @@ variable "name_prefix" {
 variable "name_suffix" {
   description = "Optional suffix for the generated name"
   type        = string
-  default     = ""
+  default     = "to"
 }
 
 variable "use_caf_naming" {
