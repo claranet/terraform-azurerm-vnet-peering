@@ -1,4 +1,4 @@
-# v5. - unreleased
+# v5.0.0 - 2021-07-08
 
 Breaking
   * AZ-495: Update provider block with provider aliases and avoid warning with Terraform 0.15+
