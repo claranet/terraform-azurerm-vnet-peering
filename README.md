@@ -103,43 +103,57 @@ module "azure-vnet-peering" {
 }
 ```
 
+<!-- BEGIN_TF_DOCS -->
 ## Providers
 
-| Name        | Version |
-| ----------- | ------- |
-| azurecaf    | ~> 1.1  |
-| azurerm.dst | >= 2.0  |
-| azurerm.src | >= 2.0  |
+| Name | Version |
+|------|---------|
+| azurecaf | ~> 1.1 |
+| azurerm.dst | >= 2.0 |
+| azurerm.src | >= 2.0 |
+
+## Modules
+
+No modules.
+
+## Resources
+
+| Name | Type |
+|------|------|
+| [azurecaf_name.vnet-peering-dst](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
+| [azurecaf_name.vnet-peering-src](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/name) | resource |
+| [azurerm_virtual_network_peering.peering_dest](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering) | resource |
+| [azurerm_virtual_network_peering.peering_src](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering) | resource |
 
 ## Inputs
 
-| Name                                  | Description                                                                                                                                                                                                                                                                                     | Type     | Default | Required |
-| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------- | :------: |
-| allow\_forwarded\_dest\_traffic       | Option allow\_forwarded\_traffic for the dest vnet to peer. Controls if forwarded traffic from VMs in the remote virtual network is allowed. Defaults to false. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_forwarded_traffic                          | `bool`   | `false` |    no    |
-| allow\_forwarded\_src\_traffic        | Option allow\_forwarded\_traffic for the src vnet to peer. Controls if forwarded traffic from VMs in the remote virtual network is allowed. Defaults to false. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_forwarded_traffic                           | `bool`   | `false` |    no    |
-| allow\_gateway\_dest\_transit         | Option allow\_gateway\_transit for the dest vnet to peer. Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_gateway_transit                             | `bool`   | `false` |    no    |
-| allow\_gateway\_src\_transit          | Option allow\_gateway\_transit for the src vnet to peer. Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_gateway_transit                              | `bool`   | `false` |    no    |
-| allow\_virtual\_dest\_network\_access | Option allow\_virtual\_network\_access for the dest vnet to peer. Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to false. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_virtual_network_access | `bool`   | `false` |    no    |
-| allow\_virtual\_src\_network\_access  | Option allow\_virtual\_network\_access for the src vnet to peer. Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to false. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_virtual_network_access  | `bool`   | `false` |    no    |
-| custom\_peering\_dst\_name            | Custom name of the vnet peerings to create                                                                                                                                                                                                                                                      | `string` | `""`    |    no    |
-| custom\_peering\_src\_name            | Custom name of the vnet peerings to create                                                                                                                                                                                                                                                      | `string` | `""`    |    no    |
-| name\_prefix                          | Optional prefix for the generated name                                                                                                                                                                                                                                                          | `string` | `""`    |    no    |
-| name\_suffix                          | Optional suffix for the generated name                                                                                                                                                                                                                                                          | `string` | `"to"`  |    no    |
-| use\_caf\_naming                      | Use the Azure CAF naming provider to generate default resource name. `custom_rg_name` override this if set. Legacy default name is used if this is set to `false`.                                                                                                                              | `bool`   | `true`  |    no    |
-| use\_remote\_dest\_gateway            | Option use\_remote\_gateway for the dest vnet to peer. Controls if remote gateways can be used on the local virtual network. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#use_remote_gateways                                                                 | `bool`   | `false` |    no    |
-| use\_remote\_src\_gateway             | Option use\_remote\_gateway for the src vnet to peer. Controls if remote gateways can be used on the local virtual network. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#use_remote_gateways                                                                  | `bool`   | `false` |    no    |
-| vnet\_dest\_id                        | ID of the dest vnet to peer                                                                                                                                                                                                                                                                     | `string` | n/a     |   yes    |
-| vnet\_src\_id                         | ID of the src vnet to peer                                                                                                                                                                                                                                                                      | `string` | n/a     |   yes    |
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| allow\_forwarded\_dest\_traffic | Option allow\_forwarded\_traffic for the dest vnet to peer. Controls if forwarded traffic from VMs in the remote virtual network is allowed. Defaults to false. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_forwarded_traffic | `bool` | `false` | no |
+| allow\_forwarded\_src\_traffic | Option allow\_forwarded\_traffic for the src vnet to peer. Controls if forwarded traffic from VMs in the remote virtual network is allowed. Defaults to false. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_forwarded_traffic | `bool` | `false` | no |
+| allow\_gateway\_dest\_transit | Option allow\_gateway\_transit for the dest vnet to peer. Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_gateway_transit | `bool` | `false` | no |
+| allow\_gateway\_src\_transit | Option allow\_gateway\_transit for the src vnet to peer. Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_gateway_transit | `bool` | `false` | no |
+| allow\_virtual\_dest\_network\_access | Option allow\_virtual\_network\_access for the dest vnet to peer. Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to false. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_virtual_network_access | `bool` | `false` | no |
+| allow\_virtual\_src\_network\_access | Option allow\_virtual\_network\_access for the src vnet to peer. Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to false. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#allow_virtual_network_access | `bool` | `false` | no |
+| custom\_peering\_dst\_name | Custom name of the vnet peerings to create | `string` | `""` | no |
+| custom\_peering\_src\_name | Custom name of the vnet peerings to create | `string` | `""` | no |
+| name\_prefix | Optional prefix for the generated name | `string` | `""` | no |
+| name\_suffix | Optional suffix for the generated name | `string` | `"to"` | no |
+| use\_caf\_naming | Use the Azure CAF naming provider to generate default resource name. `custom_rg_name` override this if set. Legacy default name is used if this is set to `false`. | `bool` | `true` | no |
+| use\_remote\_dest\_gateway | Option use\_remote\_gateway for the dest vnet to peer. Controls if remote gateways can be used on the local virtual network. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#use_remote_gateways | `bool` | `false` | no |
+| use\_remote\_src\_gateway | Option use\_remote\_gateway for the src vnet to peer. Controls if remote gateways can be used on the local virtual network. https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html#use_remote_gateways | `bool` | `false` | no |
+| vnet\_dest\_id | ID of the dest vnet to peer | `string` | n/a | yes |
+| vnet\_src\_id | ID of the src vnet to peer | `string` | n/a | yes |
 
 ## Outputs
 
-| Name                      | Description                       |
-| ------------------------- | --------------------------------- |
-| vnet\_peering\_dest\_id   | Virtual network dest peering id   |
+| Name | Description |
+|------|-------------|
+| vnet\_peering\_dest\_id | Virtual network dest peering id |
 | vnet\_peering\_dest\_name | Virtual network dest peering name |
-| vnet\_peering\_src\_id    | Virtual network src peering id    |
-| vnet\_peering\_src\_name  | Virtual network src peering name  |
-
+| vnet\_peering\_src\_id | Virtual network src peering id |
+| vnet\_peering\_src\_name | Virtual network src peering name |
+<!-- END_TF_DOCS -->
 ## Related documentation
 
 Terraform resource documentation: [terraform.io/docs/providers/azurerm/r/virtual_network_peering.html](https://www.terraform.io/docs/providers/azurerm/r/virtual_network_peering.html)

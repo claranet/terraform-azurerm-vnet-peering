@@ -1,3 +1,8 @@
+# v5.0.1 - unreleased
+
+Updated
+  * AZ-532: Revamp README with latest `terraform-docs` tool
+
 # v5.0.0 - 2021-07-08
 
 Breaking
