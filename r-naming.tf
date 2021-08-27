@@ -1,4 +1,4 @@
-resource "azurecaf_name" "vnet-peering-src" {
+resource "azurecaf_name" "vnet_peering_src" {
   name          = local.vnet_src_name
   resource_type = "azurerm_virtual_network_peering"
   prefixes      = var.name_prefix == "" ? null : [local.name_prefix]
@@ -7,7 +7,7 @@ resource "azurecaf_name" "vnet-peering-src" {
   separator     = "-"
 }
 
-resource "azurecaf_name" "vnet-peering-dst" {
+resource "azurecaf_name" "vnet_peering_dst" {
   name          = local.vnet_dest_name
   resource_type = "azurerm_virtual_network_peering"
   prefixes      = var.name_prefix == "" ? null : [local.name_prefix]

@@ -4,7 +4,7 @@ resource "azurerm_virtual_network_peering" "peering_src" {
 
   name = coalesce(
     var.custom_peering_src_name,
-    var.use_caf_naming ? azurecaf_name.vnet-peering-src.result : format("peering-to-%s", local.vnet_dest_name),
+    var.use_caf_naming ? azurecaf_name.vnet_peering_src.result : format("peering-to-%s", local.vnet_dest_name),
   )
   resource_group_name          = local.vnet_src_resource_group_name
   virtual_network_name         = local.vnet_src_name
@@ -20,7 +20,7 @@ resource "azurerm_virtual_network_peering" "peering_dest" {
 
   name = coalesce(
     var.custom_peering_dst_name,
-    var.use_caf_naming ? azurecaf_name.vnet-peering-dst.result : format("peering-to-%s", local.vnet_src_name),
+    var.use_caf_naming ? azurecaf_name.vnet_peering_dst.result : format("peering-to-%s", local.vnet_src_name),
   )
   resource_group_name          = local.vnet_dest_resource_group_name
   virtual_network_name         = local.vnet_dest_name
