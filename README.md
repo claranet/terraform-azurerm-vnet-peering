@@ -95,8 +95,8 @@ module "azure-vnet-peering" {
   vnet_src_id  = module.azure-virtual-network.virtual_network_id
   vnet_dest_id = data.terraform_remote_state.destination_infra.virtual_network_id
 
-  allow_forwarded_src_traffic = true
-  allow_forwarded_dst_traffic = true
+  allow_forwarded_src_traffic  = true
+  allow_forwarded_dest_traffic = true
 
   allow_virtual_src_network_access  = true
   allow_virtual_dest_network_access = true
