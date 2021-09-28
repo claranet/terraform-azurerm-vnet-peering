@@ -23,6 +23,11 @@ variable "azure_subscription_id" {
   type        = string
 }
 
+variable "preprod_subscription_id" {
+  description = "Preprod Subscription ID"
+  type        = string
+}
+
 variable "azure_tenant_id" {
   description = "Tenant ID"
   type        = string

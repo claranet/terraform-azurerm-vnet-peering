@@ -29,15 +29,14 @@ More details about variables set by the `terraform-wrapper` available in the [do
 
 ```hcl
 provider "azurerm" {
-  alias           = "dst"
   subscription_id = var.azure_subscription_id
   tenant_id       = var.azure_tenant_id
 
   features {}
 }
 provider "azurerm" {
-  alias           = "src"
-  subscription_id = var.azure_subscription_id
+  alias           = "preprod"
+  subscription_id = var.preprod_subscription_id
   tenant_id       = var.azure_tenant_id
 
   features {}
@@ -79,6 +78,11 @@ module "azure_virtual_network" {
 module "azure_vnet_peering" {
   source  = "claranet/vnet-peering/azurerm"
   version = "x.x.x"
+
+  providers = {
+    azurerm.src = azurerm
+    azurerm.dst = azurerm.preprod
+  }
 
   vnet_src_id  = module.azure_virtual_network.virtual_network_id
   vnet_dest_id = var.virtual_network_id_dest
