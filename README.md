@@ -10,22 +10,16 @@ which can belong to two different [Azure Subscriptions](https://docs.microsoft.c
 
 * Peering between two virtual networks in different tenants isn't possible.
 
-## Version compatibility
+<!-- BEGIN_TF_DOCS -->
+## Global versioning rule for Claranet Azure modules
 
 | Module version | Terraform version | AzureRM version |
 | -------------- | ----------------- | --------------- |
-| >= 5.x.x       | 0.15.x, 1.0.x     | >= 2.0          |
-| >= 4.x.x       | 0.13.x, 0.14.x    | >= 2.0          |
+| >= 5.x.x       | 0.15.x & 1.0.x    | >= 2.0          |
+| >= 4.x.x       | 0.13.x            | >= 2.0          |
 | >= 3.x.x       | 0.12.x            | >= 2.0          |
 | >= 2.x.x       | 0.12.x            | < 2.0           |
 | <  2.x.x       | 0.11.x            | < 2.0           |
-
-## Naming
-
-Resource naming is based on the [Microsoft CAF naming convention best practices](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming). Legacy naming is available by setting the parameter `use_caf_naming` to false.
-We rely on [the official Terraform Azure CAF naming provider](https://registry.terraform.io/providers/aztfmod/azurecaf/latest/docs/resources/azurecaf_name) to generate resource names.
-
-Resource generated CAF name by default: `vpeer-{VNET Source name}-to-{VNET Destination name}`
 
 ## Usage
 
@@ -35,21 +29,20 @@ More details about variables set by the `terraform-wrapper` available in the [do
 
 ```hcl
 provider "azurerm" {
-  alias           = "dst"
   subscription_id = var.azure_subscription_id
   tenant_id       = var.azure_tenant_id
 
   features {}
 }
 provider "azurerm" {
-  alias           = "src"
-  subscription_id = var.azure_subscription_id
+  alias           = "preprod"
+  subscription_id = var.preprod_subscription_id
   tenant_id       = var.azure_tenant_id
 
   features {}
 }
 
-module "azure-region" {
+module "azure_region" {
   source  = "claranet/regions/azurerm"
   version = "x.x.x"
 
@@ -60,50 +53,49 @@ module "rg" {
   source  = "claranet/rg/azurerm"
   version = "x.x.x"
 
-  location    = module.azure-region.location
+  location    = module.azure_region.location
   client_name = var.client_name
   environment = var.environment
   stack       = var.stack
 }
 
-module "azure-virtual-network" {
+module "azure_virtual_network" {
   source  = "claranet/vnet/azurerm"
   version = "x.x.x"
 
   environment    = var.environment
-  location       = module.azure-region.location
-  location_short = module.azure-region.location_short
+  location       = module.azure_region.location
+  location_short = module.azure_region.location_short
   client_name    = var.client_name
   stack          = var.stack
 
   resource_group_name = module.rg.resource_group_name
 
-  custom_vnet_name = var.custom_vnet_name
-  vnet_cidr        = ["10.10.0.0/16"]
-  dns_servers      = ["10.0.0.4", "10.0.0.5"] # Can be empty if not used
+  vnet_cidr   = ["10.10.0.0/16"]
+  dns_servers = ["10.0.0.4", "10.0.0.5"] # Can be empty if not used
 }
 
-module "azure-vnet-peering" {
+module "azure_vnet_peering" {
   source  = "claranet/vnet-peering/azurerm"
   version = "x.x.x"
 
   providers = {
-    azurerm.src = azurerm.src
-    azurerm.dst = azurerm.dst
+    azurerm.src = azurerm
+    azurerm.dst = azurerm.preprod
   }
 
-  vnet_src_id  = module.azure-virtual-network.virtual_network_id
-  vnet_dest_id = data.terraform_remote_state.destination_infra.virtual_network_id
+  vnet_src_id  = module.azure_virtual_network.virtual_network_id
+  vnet_dest_id = var.virtual_network_id_dest
 
-  allow_forwarded_src_traffic = true
-  allow_forwarded_dst_traffic = true
+  allow_forwarded_src_traffic  = true
+  allow_forwarded_dest_traffic = true
 
   allow_virtual_src_network_access  = true
   allow_virtual_dest_network_access = true
 }
+
 ```
 
-<!-- BEGIN_TF_DOCS -->
 ## Providers
 
 | Name | Version |
