@@ -3,6 +3,10 @@ variables:
   TF_MIN_VERSION: "1.3"
   AZURERM_PROVIDER_MIN_VERSION: "3.0"
 
+default:
+  before_script:
+    - "[[ -f .config/generate_main_ci.sh ]] && .config/generate_main_ci.sh || echo 'No main CI pipeline generation script found'"
+
 include:
   - project: "claranet/projects/cloud/azure/terraform/ci"
     ref: master
