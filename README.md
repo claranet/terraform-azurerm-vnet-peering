@@ -109,8 +109,8 @@ module "azure_vnet_peering" {
 | Name | Version |
 |------|---------|
 | azurecaf | ~> 1.2, >= 1.2.22 |
-| azurerm.dst | >= 2.0 |
-| azurerm.src | >= 2.0 |
+| azurerm.dst | ~> 3.0 |
+| azurerm.src | ~> 3.0 |
 
 ## Modules
 
