@@ -1,3 +1,25 @@
+## 7.1.0 (2024-10-03)
+
+### Features
+
+* use Claranet "azurecaf" provider 29f9ba0
+
+### Documentation
+
+* update README badge to use OpenTofu registry 10465e4
+
+### Miscellaneous Chores
+
+* **deps:** update dependency terraform-docs to v0.19.0 18843c6
+* **deps:** update dependency trivy to v0.55.1 a6c4b80
+* **deps:** update dependency trivy to v0.55.2 0182c50
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.18.0 62f365c
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.94.2 498ff46
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.94.3 ee6af7d
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.95.0 1d4656e
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.96.0 5a4c74a
+* **deps:** update pre-commit hook antonbabenko/pre-commit-terraform to v1.96.1 04c5192
+
 ## 7.0.0 (2024-09-06)
 
 ### ⚠ BREAKING CHANGES
