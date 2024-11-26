@@ -1,33 +1,3 @@
-provider "azurerm" {
-  subscription_id = var.azure_subscription_id
-  tenant_id       = var.azure_tenant_id
-
-  features {}
-}
-provider "azurerm" {
-  alias           = "preprod"
-  subscription_id = var.preprod_subscription_id
-  tenant_id       = var.azure_tenant_id
-
-  features {}
-}
-
-module "azure_region" {
-  source  = "claranet/regions/azurerm"
-  version = "x.x.x"
-
-  azure_region = var.azure_region
-}
-
-module "rg" {
-  source  = "claranet/rg/azurerm"
-  version = "x.x.x"
-
-  location    = module.azure_region.location
-  client_name = var.client_name
-  environment = var.environment
-  stack       = var.stack
-}
 
 module "azure_virtual_network" {
   source  = "claranet/vnet/azurerm"
@@ -39,9 +9,9 @@ module "azure_virtual_network" {
   client_name    = var.client_name
   stack          = var.stack
 
-  resource_group_name = module.rg.resource_group_name
+  resource_group_name = module.rg.name
 
-  vnet_cidr   = ["10.10.0.0/16"]
+  cidrs       = ["10.10.0.0/16"]
   dns_servers = ["10.0.0.4", "10.0.0.5"] # Can be empty if not used
 }
 
@@ -50,16 +20,16 @@ module "azure_vnet_peering" {
   version = "x.x.x"
 
   providers = {
-    azurerm.src = azurerm
-    azurerm.dst = azurerm.preprod
+    azurerm.src  = azurerm
+    azurerm.dest = azurerm.preprod
   }
 
-  vnet_src_id  = module.azure_virtual_network.virtual_network_id
-  vnet_dest_id = var.virtual_network_id_dest
+  src_virtual_network_id  = module.azure_virtual_network.id
+  dest_virtual_network_id = var.virtual_network_id_dest
 
-  allow_forwarded_src_traffic  = true
-  allow_forwarded_dest_traffic = true
+  src_forwarded_traffic_allowed  = true
+  dest_forwarded_traffic_allowed = true
 
-  allow_virtual_src_network_access  = true
-  allow_virtual_dest_network_access = true
+  src_virtual_network_access_allowed  = true
+  dest_virtual_network_access_allowed = true
 }

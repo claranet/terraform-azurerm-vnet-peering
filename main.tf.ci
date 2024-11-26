@@ -1,5 +1,5 @@
 provider "azurerm" {
-  alias           = "dst"
+  alias           = "dest"
   subscription_id = "000-000-000"
   tenant_id       = "000-000-000"
   features {}
@@ -10,4 +10,3 @@ provider "azurerm" {
   tenant_id       = "000-000-000"
   features {}
 }
-
