@@ -7,6 +7,7 @@
 variable "src_virtual_network_id" {
   description = "ID of the source Virtual Network to peer."
   type        = string
+  nullable    = false
 }
 
 variable "src_virtual_network_access_allowed" {
@@ -42,6 +43,7 @@ variable "use_src_remote_gateway" {
 variable "dest_virtual_network_id" {
   description = "ID of the destination Virtual Network to peer."
   type        = string
+  nullable    = false
 }
 
 variable "dest_virtual_network_access_allowed" {
