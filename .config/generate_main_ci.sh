@@ -8,7 +8,7 @@ provider "azurerm" {
 }
 
 provider "azurerm" {
-  alias = "dst"
+  alias = "dest"
 
   features {}
 }

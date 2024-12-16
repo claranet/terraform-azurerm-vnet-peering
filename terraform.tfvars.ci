@@ -1,10 +1,7 @@
-vnet_src_id  = "id1"
-vnet_dest_id = "id2"
-vnet_src_name  = "vnet1"
-vnet_dest_name = "vnet2"
-vnet_src_rg_name  = "rg1"
-vnet_dest_rg_name = "rg2"
-allow_forwarded_src_traffic  = "true"
-allow_forwarded_dest_traffic = "true"
-allow_virtual_src_network_access  = "true"
-allow_virtual_dest_network_access = "true"
+src_virtual_network_id  = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVNet1"
+dest_virtual_network_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVNet2"
+
+src_forwarded_traffic_allowed       = true
+dest_forwarded_traffic_allowed      = true
+src_virtual_network_access_allowed  = true
+dest_virtual_network_access_allowed = true

@@ -1,32 +1,42 @@
 
-resource "azurerm_virtual_network_peering" "peering_src" {
+resource "azurerm_virtual_network_peering" "main" {
   provider = azurerm.src
 
   name = coalesce(
-    var.custom_peering_src_name,
-    var.use_caf_naming ? data.azurecaf_name.vnet_peering_src.result : format("peering-to-%s", local.vnet_dest_name),
+    var.src_custom_name,
+    data.azurecaf_name.src.result,
   )
-  resource_group_name          = local.vnet_src_resource_group_name
-  virtual_network_name         = local.vnet_src_name
-  remote_virtual_network_id    = var.vnet_dest_id
-  allow_virtual_network_access = var.allow_virtual_src_network_access
-  allow_forwarded_traffic      = var.allow_forwarded_src_traffic
-  allow_gateway_transit        = var.allow_gateway_src_transit
-  use_remote_gateways          = var.use_remote_src_gateway
+  resource_group_name          = local.src_resource_group_name
+  virtual_network_name         = local.src_name
+  remote_virtual_network_id    = var.dest_virtual_network_id
+  allow_virtual_network_access = var.src_virtual_network_access_allowed
+  allow_forwarded_traffic      = var.src_forwarded_traffic_allowed
+  allow_gateway_transit        = var.src_gateway_transit_allowed
+  use_remote_gateways          = var.use_src_remote_gateway
 }
 
-resource "azurerm_virtual_network_peering" "peering_dest" {
-  provider = azurerm.dst
+moved {
+  from = azurerm_virtual_network_peering.peering_src
+  to   = azurerm_virtual_network_peering.main
+}
+
+resource "azurerm_virtual_network_peering" "dest" {
+  provider = azurerm.dest
 
   name = coalesce(
-    var.custom_peering_dst_name,
-    var.use_caf_naming ? data.azurecaf_name.vnet_peering_dst.result : format("peering-to-%s", local.vnet_src_name),
+    var.dst_custom_name,
+    data.azurecaf_name.dst.result,
   )
-  resource_group_name          = local.vnet_dest_resource_group_name
-  virtual_network_name         = local.vnet_dest_name
-  remote_virtual_network_id    = var.vnet_src_id
-  allow_virtual_network_access = var.allow_virtual_dest_network_access
-  allow_forwarded_traffic      = var.allow_forwarded_dest_traffic
-  allow_gateway_transit        = var.allow_gateway_dest_transit
-  use_remote_gateways          = var.use_remote_dest_gateway
+  resource_group_name          = local.dest_resource_group_name
+  virtual_network_name         = local.dest_name
+  remote_virtual_network_id    = var.src_virtual_network_id
+  allow_virtual_network_access = var.dest_virtual_network_access_allowed
+  allow_forwarded_traffic      = var.dest_forwarded_traffic_allowed
+  allow_gateway_transit        = var.dest_gateway_transit_allowed
+  use_remote_gateways          = var.use_dest_remote_gateway
+}
+
+moved {
+  from = azurerm_virtual_network_peering.peering_dest
+  to   = azurerm_virtual_network_peering.dest
 }

@@ -1,13 +1,9 @@
 locals {
-  vnet_src_parts               = split("/", var.vnet_src_id)
-  vnet_src_name                = element(local.vnet_src_parts, 8)
-  vnet_src_resource_group_name = element(local.vnet_src_parts, 4)
+  parsed_src              = provider::azapi::parse_resource_id("Microsoft.Network/virtualNetworks", var.src_virtual_network_id)
+  src_name                = local.parsed_src.name
+  src_resource_group_name = local.parsed_src.resource_group_name
 
-  vnet_dest_parts               = split("/", var.vnet_dest_id)
-  vnet_dest_name                = element(local.vnet_dest_parts, 8)
-  vnet_dest_resource_group_name = element(local.vnet_dest_parts, 4)
-
-  # No more need to get Sub ID, provider is configured in the upper Terraform code
-  # vnet_src_subscription_id     = element(local.vnet_src_parts, 2)
-  # vnet_dest_subscription_id     = element(local.vnet_dest_parts, 2)
+  parsed_dest              = provider::azapi::parse_resource_id("Microsoft.Network/virtualNetworks", var.dest_virtual_network_id)
+  dest_name                = local.parsed_dest.name
+  dest_resource_group_name = local.parsed_dest.resource_group_name
 }
