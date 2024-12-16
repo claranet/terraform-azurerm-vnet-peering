@@ -1,3 +1,45 @@
+## 8.0.0 (2024-12-16)
+
+### ⚠ BREAKING CHANGES
+
+* **AZ-1088:** use azapi parse_resource_id function
+* **AZ-1088:** module v8 structure and updates
+
+### Features
+
+* **AZ-1088:** module v8 structure and updates 87b2f86
+* **AZ-1088:** use azapi parse_resource_id function f3d32fd
+
+### Continuous Integration
+
+* fix CI tfvars f6cafaa
+* update provider alias script 5292384
+
+### Miscellaneous Chores
+
+* **AZ-1088:** apply suggestion 6b915eb
+* **AZ-1088:** apply suggestions adefcd5
+* **deps:** update dependency opentofu to v1.8.3 b080533
+* **deps:** update dependency opentofu to v1.8.4 2d918ee
+* **deps:** update dependency opentofu to v1.8.6 a708ef6
+* **deps:** update dependency pre-commit to v4 3b4ccd2
+* **deps:** update dependency pre-commit to v4.0.1 2a20718
+* **deps:** update dependency tflint to v0.54.0 73eb314
+* **deps:** update dependency trivy to v0.56.1 4e933a5
+* **deps:** update dependency trivy to v0.56.2 8872383
+* **deps:** update dependency trivy to v0.57.1 42af15f
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.19.0 0373c49
+* **deps:** update pre-commit hook pre-commit/pre-commit-hooks to v5 a0cea17
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.1.0 ac2ea2d
+* **deps:** update tools 21a5f2d
+* **deps:** update tools 41a6e01
+* prepare for new examples structure 7119a77
+* update examples structure c9e1730
+
+### Revert
+
+* Revert "feat: use Claranet "azurecaf" provider" 6d363e4
+
 ## 7.1.0 (2024-10-03)
 
 ### Features
