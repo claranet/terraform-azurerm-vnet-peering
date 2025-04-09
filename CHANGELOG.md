@@ -1,3 +1,33 @@
+## 8.0.1 (2025-04-09)
+
+### Bug Fixes
+
+* update AzAPI version constrain ca11de2
+
+### Miscellaneous Chores
+
+* **deps:** update dependency opentofu to v1.8.8 7418d21
+* **deps:** update dependency opentofu to v1.9.0 9373f44
+* **deps:** update dependency pre-commit to v4.1.0 f6a4b4a
+* **deps:** update dependency pre-commit to v4.2.0 bcb5992
+* **deps:** update dependency terraform-docs to v0.20.0 6823542
+* **deps:** update dependency tflint to v0.55.0 f85f330
+* **deps:** update dependency tflint to v0.55.1 2954fa4
+* **deps:** update dependency trivy to v0.58.1 065da48
+* **deps:** update dependency trivy to v0.58.2 f2ea3b8
+* **deps:** update dependency trivy to v0.59.0 068ba1d
+* **deps:** update dependency trivy to v0.59.1 532a96c
+* **deps:** update dependency trivy to v0.60.0 cf0f6e5
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.20.0 0bbe446
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.21.0 e5a780d
+* **deps:** update pre-commit hook alessandrojcm/commitlint-pre-commit-hook to v9.22.0 aa75fcc
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.2.0 7f931d8
+* **deps:** update terraform azapi to ~> 2.2.0 ed55d7b
+* **deps:** update terraform azapi to ~> 2.3.0 08f4467
+* **deps:** update tools 4e75811
+* update Github templates d37b59d
+* update tflint config for v0.55.0 c5c0592
+
 ## 8.0.0 (2024-12-16)
 
 ### ⚠ BREAKING CHANGES
