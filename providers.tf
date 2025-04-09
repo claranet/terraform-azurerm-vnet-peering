@@ -10,8 +10,8 @@ terraform {
       version = "~> 1.2.28"
     }
     azapi = {
-      source  = "Azure/azapi"
-      version = "~> 2.3.0"
+      source  = "azure/azapi"
+      version = "~> 2.3"
     }
   }
 }
