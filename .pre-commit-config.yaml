@@ -1,16 +1,5 @@
 default_install_hook_types: [commit-msg, pre-commit]
 repos:
-  - repo: local
-    hooks:
-      - id: generate-terraform-main
-        name: generate-terraform-main
-        require_serial: true
-        entry: .config/generate_main_ci.sh
-        language: script
-        files: \.tf(vars)?$
-        pass_filenames: false
-        stages: [pre-commit]
-
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0
     hooks:
@@ -61,9 +50,8 @@ repos:
           - --args=--severity HIGH,CRITICAL
           - --args=--skip-dirs '**/.terraform'
 
-  - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
-    rev: v9.22.0
+  - repo: https://github.com/crate-ci/committed
+    rev: v1.1.7
     hooks:
-      - id: commitlint
+      - id: committed
         stages: [commit-msg]
-        additional_dependencies: ["@commitlint/config-conventional"]
