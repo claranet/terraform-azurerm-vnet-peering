@@ -19,8 +19,8 @@ resource "azurerm_virtual_network_peering" "main" {
 
   lifecycle {
     precondition {
-      condition     = length(var.src_subnet_names) == length(var.dest_subnet_names)
-      error_message = "The number of source subnet names must match the number of destination subnet names."
+      condition     = alltrue([length(var.src_subnet_names) > 0, length(var.dest_subnet_names) > 0]) || alltrue([length(var.src_subnet_names) == 0, length(var.dest_subnet_names) == 0])
+      error_message = "Both source and destination subnet names must be provided, or both must be empty."
     }
   }
 }
@@ -51,8 +51,8 @@ resource "azurerm_virtual_network_peering" "dest" {
 
   lifecycle {
     precondition {
-      condition     = length(var.src_subnet_names) == length(var.dest_subnet_names)
-      error_message = "The number of source subnet names must match the number of destination subnet names."
+      condition     = alltrue([length(var.src_subnet_names) > 0, length(var.dest_subnet_names) > 0]) || alltrue([length(var.src_subnet_names) == 0, length(var.dest_subnet_names) == 0])
+      error_message = "Both source and destination subnet names must be provided, or both must be empty."
     }
   }
 }
