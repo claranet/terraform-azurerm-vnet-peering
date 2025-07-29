@@ -9,6 +9,8 @@ which can belong to two different [Azure Subscriptions](https://docs.microsoft.c
 ## Limitations
 
 * Peering between two virtual networks in different tenants isn't possible.
+* Subnet peering needs feature registration `Microsoft.Network/AllowSubnetPeering` to be enabled in the destination subscription.
+  * `az feature register --namespace Microsoft.Network --name AllowMultiplePeeringLinksBetweenVnets`
 
 <!-- BEGIN_TF_DOCS -->
 ## Global versioning rule for Claranet Azure modules
