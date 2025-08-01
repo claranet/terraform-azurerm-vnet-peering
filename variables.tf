@@ -34,6 +34,13 @@ variable "use_src_remote_gateway" {
   default     = false
 }
 
+variable "src_subnet_names" {
+  description = "A list of local subnet names that are peered with remote Virtual Network. [See documentation](https://learn.microsoft.com/en-us/azure/virtual-network/how-to-configure-subnet-peering)"
+  type        = list(string)
+  default     = []
+  nullable    = false
+}
+
 ################
 #
 # DEST PEER CONF
@@ -68,4 +75,11 @@ variable "use_dest_remote_gateway" {
   description = "Controls if remote gateways can be used on the local virtual network. [See documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering.html#use_remote_gateways-1)."
   type        = bool
   default     = false
+}
+
+variable "dest_subnet_names" {
+  description = "A list of remote subnet names that are peered with the Virtual Network. [See documentation](https://learn.microsoft.com/en-us/azure/virtual-network/how-to-configure-subnet-peering)"
+  type        = list(string)
+  default     = []
+  nullable    = false
 }

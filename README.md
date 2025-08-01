@@ -9,6 +9,8 @@ which can belong to two different [Azure Subscriptions](https://docs.microsoft.c
 ## Limitations
 
 * Peering between two virtual networks in different tenants isn't possible.
+* Subnet peering needs feature registration `Microsoft.Network/AllowSubnetPeering` to be enabled in the destination subscription.
+  * `az feature register --namespace Microsoft.Network --name AllowMultiplePeeringLinksBetweenVnets`
 
 <!-- BEGIN_TF_DOCS -->
 ## Global versioning rule for Claranet Azure modules
@@ -105,6 +107,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | dest\_forwarded\_traffic\_allowed | Controls if forwarded traffic from VMs in the remote virtual network is allowed. [See documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering.html#allow_forwarded_traffic-1). | `bool` | `false` | no |
 | dest\_gateway\_transit\_allowed | Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network. [See documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering.html#allow_gateway_transit-1). | `bool` | `false` | no |
+| dest\_subnet\_names | A list of remote subnet names that are peered with the Virtual Network. [See documentation](https://learn.microsoft.com/en-us/azure/virtual-network/how-to-configure-subnet-peering) | `list(string)` | `[]` | no |
 | dest\_virtual\_network\_access\_allowed | Controls if the VMs in the remote virtual network can access VMs in the local virtual network. [See documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering.html#allow_virtual_network_access-1). | `bool` | `false` | no |
 | dest\_virtual\_network\_id | ID of the destination Virtual Network to peer. | `string` | n/a | yes |
 | dst\_custom\_name | Custom name of the vnet peerings to create. | `string` | `""` | no |
@@ -113,6 +116,7 @@ No modules.
 | src\_custom\_name | Custom name of the vnet peerings to create. | `string` | `""` | no |
 | src\_forwarded\_traffic\_allowed | Controls if forwarded traffic from VMs in the remote virtual network is allowed. [See documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering.html#allow_forwarded_traffic-1). | `bool` | `false` | no |
 | src\_gateway\_transit\_allowed | Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network. [See documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering.html#allow_gateway_transit-1). | `bool` | `false` | no |
+| src\_subnet\_names | A list of local subnet names that are peered with remote Virtual Network. [See documentation](https://learn.microsoft.com/en-us/azure/virtual-network/how-to-configure-subnet-peering) | `list(string)` | `[]` | no |
 | src\_virtual\_network\_access\_allowed | Controls if the VMs in the remote virtual network can access VMs in the local virtual network. [See documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering.html#allow_virtual_network_access-1). | `bool` | `false` | no |
 | src\_virtual\_network\_id | ID of the source Virtual Network to peer. | `string` | n/a | yes |
 | use\_dest\_remote\_gateway | Controls if remote gateways can be used on the local virtual network. [See documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering.html#use_remote_gateways-1). | `bool` | `false` | no |
