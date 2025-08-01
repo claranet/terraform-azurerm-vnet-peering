@@ -1,3 +1,33 @@
+## 8.1.0 (2025-08-01)
+
+### Features
+
+* **AZ-1596:** 🌐 add subnet names support for virtual network peering 13f6dad
+* **AZ-1596:** 🔧 update precondition logic for subnet name validation f9d18a2
+
+### Documentation
+
+* **AZ-1596:** 📚 update README with subnet peering feature registration details bb42bbd
+
+### Miscellaneous Chores
+
+* **⚙️:** ✏️ update template identifier for MR review 9831aaf
+* 🗑️ remove old commitlint configuration files 96ffe96
+* **deps:** update dependency opentofu to v1.10.0 e7df7f7
+* **deps:** update dependency opentofu to v1.10.1 57d97ee
+* **deps:** update dependency opentofu to v1.10.3 4da4f88
+* **deps:** update dependency opentofu to v1.9.1 31a644d
+* **deps:** update dependency tflint to v0.57.0 3800f16
+* **deps:** update dependency tflint to v0.58.0 4dfbff5
+* **deps:** update dependency tflint to v0.58.1 c1d8ba1
+* **deps:** update dependency trivy to v0.61.1 20748fe
+* **deps:** update dependency trivy to v0.62.0 a96bf9f
+* **deps:** update dependency trivy to v0.62.1 d9fb1b3
+* **deps:** update dependency trivy to v0.63.0 e8344df
+* **deps:** update pre-commit hook tofuutils/pre-commit-opentofu to v2.2.1 48bb41d
+* **deps:** update tools 9489949
+* **deps:** update tools 24a72cf
+
 ## 8.0.1 (2025-04-09)
 
 ### Bug Fixes
