@@ -85,8 +85,8 @@ module "azure_vnet_peering" {
 | Name | Version |
 |------|---------|
 | azurecaf | ~> 1.2.28 |
-| azurerm.dest | ~> 4.0 |
-| azurerm.src | ~> 4.0 |
+| azurerm.dest | ~> 4.31 |
+| azurerm.src | ~> 4.31 |
 
 ## Modules
 
