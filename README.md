@@ -83,7 +83,7 @@ module "azure_vnet_peering" {
 ## Providers
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | azurecaf | >= 1.2.28 |
 | azurerm.dest | ~> 4.31 |
 | azurerm.src | ~> 4.31 |
@@ -95,7 +95,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [azurerm_virtual_network_peering.dest](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering) | resource |
 | [azurerm_virtual_network_peering.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering) | resource |
 | [azurecaf_name.dst](https://registry.terraform.io/providers/claranet/azurecaf/latest/docs/data-sources/name) | data source |
@@ -104,7 +104,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | dest\_forwarded\_traffic\_allowed | Controls if forwarded traffic from VMs in the remote virtual network is allowed. [See documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering.html#allow_forwarded_traffic-1). | `bool` | `false` | no |
 | dest\_gateway\_transit\_allowed | Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network. [See documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network_peering.html#allow_gateway_transit-1). | `bool` | `false` | no |
 | dest\_subnet\_names | A list of remote subnet names that are peered with the Virtual Network. [See documentation](https://learn.microsoft.com/en-us/azure/virtual-network/how-to-configure-subnet-peering) | `list(string)` | `[]` | no |
@@ -125,7 +125,7 @@ No modules.
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | dest\_id | Destination Virtual network peering id. |
 | dest\_name | Destination Virtual network peering name. |
 | id | Source Virtual network peering id. |
