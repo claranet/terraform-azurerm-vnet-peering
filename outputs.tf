@@ -21,9 +21,11 @@ output "dest_name" {
 output "resource" {
   description = "Virtual network peering resource object."
   value       = azurerm_virtual_network_peering.main
+  sensitive   = true
 }
 
 output "resource_dest" {
   description = "Destination Virtual network peering resource object."
   value       = azurerm_virtual_network_peering.dest
+  sensitive   = true
 }
